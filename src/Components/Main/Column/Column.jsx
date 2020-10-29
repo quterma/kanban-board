@@ -4,6 +4,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import ColumnInnerList from './ColumnInnerList';
 import ColumnHeader from './ColumnHeader';
 import ColumnFooter from './ColumnFooter';
+import { useWindowSize } from '../../../utils/useWindowSize';
 
 const Container = styled.div`
   border: 1px solid lightgrey;
@@ -39,8 +40,13 @@ const Column = ({ column, tasks, index, isDropDisabled, columns, columnOrder }) 
   const prevColumn = columns[columnOrder[index - 1]];
   const thisColumn = columns[columnOrder[index]];
 
+  const width = useWindowSize()[0];
+    // const [isDropDisabled,setIsDropDisabled] = useState(width < 780);
+  // useEffect(() => setIsDropDisabled(width < 780), [width]);
+  const isDragDisabled = width < 780;
+  
   return (
-    <Draggable draggableId={column.id} index={index}>
+    <Draggable draggableId={column.id} index={index} isDragDisabled={isDragDisabled}>
       {(provided) => (
         <Container ref={provided.innerRef} {...provided.draggableProps}>
           <ColumnHeaderContainer {...provided.dragHandleProps}>

@@ -24,6 +24,7 @@ const Wrapper = styled.div`
 const Main = ({ columnOrder, columns, homeIndex }) => {
   const width = useWindowSize()[0];
 
+
   // check overflow for jc-center/start
   const ref = useRef(null);
   const [isOverflow, setIsOverflow] = useState(false);
@@ -35,12 +36,12 @@ const Main = ({ columnOrder, columns, homeIndex }) => {
   const dispatch = useDispatch();
   // create new column (with index 1)
   const createNewColumn = () => dispatch(createColumn());
-  
+
   return (
     // wrapper for droppable element ref={provided.innerRef}
     <Wrapper ref={ref} >
       {isEmpty ? <Button onHandleClick={createNewColumn} name='Create new list' light top={'40vh'}/> :
-        <Droppable droppableId="all-columns" direction="horizontal" type="column">
+        <Droppable droppableId="all-columns" direction="horizontal" type="column" >
           {provided => (
             <Container ref={provided.innerRef} {...provided.droppableProps} isOverflow={isOverflow} width={width}>
               <ColumnMap columnOrder={columnOrder} columns={columns} homeIndex={homeIndex}/>
