@@ -8,17 +8,14 @@ export const kanbanSlice = createSlice({
 			// 'stepId': {id: stepId (string), content: string, isCompleted: boolean}
 		},
 		tasks: {
-			"task-1": { id: "task-1", content: "One", steps: [] },
-			"task-2": { id: "task-2", content: "Two", steps: [] },
-			"task-3": { id: "task-3", content: "Three", steps: [] },
-			"task-4": { id: "task-4", content: "Four", steps: [] },
+			// "task-1": { id: "task-1", content: string, steps: [] },
 		},
 		columns: {
 			"column-1": {
 				id: "column-1",
 				title: "Backlog",
 				// this property shows an affiliation to the column and an order in it
-				taskIds: ["task-1", "task-2", "task-3", "task-4"],
+				taskIds: [],
 			},
 			"column-2": {
 				id: "column-2",

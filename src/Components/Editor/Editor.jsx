@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useWindowSize } from '../../utils/useWindowSize';
+import ButtonIcon from '../Shared/ButtonIcon';
 import Button from './../Shared/Button';
 import StepsInnerList from './StepsInnerList';
 
@@ -57,13 +59,13 @@ const Created = styled.h4`
   padding-left: 10px;
 `;
 const ButtonsWrapper = styled.div`
-  border: 1px solid grey;
+  border: ${props => props.width > 780 ? '1px solid grey' : 'none'};
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex-wrap: wrap;
   max-width: 40%;
+  padding: 1rem;
 `;
 const Editarea = styled.div`
   width: 95%;
@@ -80,6 +82,7 @@ const Editarea = styled.div`
 
 const Editor = ({ updateTaskTitle, onInputHandleChange, activateEditMode, createNewStep, deleteThisTask, closeEditPage,
   editMode, created, newTitle, title, stepIds, taskId }) => {
+  const width = useWindowSize()[0];
 
   return (
     <Wrapper>
@@ -92,10 +95,16 @@ const Editor = ({ updateTaskTitle, onInputHandleChange, activateEditMode, create
             }
             {created && <Created>{created}</Created>}
           </TitleWrapper>
-          <ButtonsWrapper>
-            <Button onHandleClick={createNewStep} name='Add step' clear />
-            <Button onHandleClick={deleteThisTask} name='Delete task' clear />
-            <Button onHandleClick={closeEditPage} name='Close edit' clear />
+          <ButtonsWrapper width={width}>
+            {width > 780 ?
+              <Button onHandleClick={createNewStep} name='Add step' clear />
+              : <ButtonIcon onHandleClick={createNewStep} className="far fa-calendar-plus" />}
+            {width > 780 ?
+              <Button onHandleClick={deleteThisTask} name='Delete task' clear />
+              : <ButtonIcon onHandleClick={deleteThisTask} className="far fa-trash-alt" />}
+            {width > 780 ?
+              <Button onHandleClick={closeEditPage} name='Close edit' clear />
+              : <ButtonIcon onHandleClick={closeEditPage} className="far fa-window-close" />}
           </ButtonsWrapper>
         </Header>
         <Editarea>
