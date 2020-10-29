@@ -56,7 +56,7 @@ const ColumnHeader = ({ title, thisColId }) => {
     <>
       {editMode ?
         <Input autoFocus onBlur={updateColumnTitle} onChange={onHandleChange} value={newTitle} name={title}/>
-        : <Title onDoubleClick={activateEditMode}>{title}</Title>}
+        : <Title onDoubleClick={activateEditMode} onTouchEnd={activateEditMode}>{title}</Title>}
       {isDropdown ?
         <RelativeContainer>
           <DropdownMenu

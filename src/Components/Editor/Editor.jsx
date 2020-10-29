@@ -7,9 +7,8 @@ import StepsInnerList from './StepsInnerList';
 const Wrapper = styled.div`
   background-color: #0079BF;
   width: 100%;
-  min-width: 400px;
-  height: 100%;
-  min-height: 600px;
+  min-width: 320px;
+  flex: 1;
   padding: 2%;
   display: flex;
   align-items: center;
@@ -22,6 +21,9 @@ const Container = styled.div`
   background-color: #EBECF0;
   border-radius: 10px;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 `;
 const Header = styled.div`
   display: flex;
@@ -64,8 +66,8 @@ const ButtonsWrapper = styled.div`
   max-width: 40%;
 `;
 const Editarea = styled.div`
-  width: 90%;
-  height: 75%;
+  width: 95%;
+  flex: 1;
   margin: 20px auto;
   padding: 20px 30px;
   font-size: 22px;
@@ -86,7 +88,7 @@ const Editor = ({ updateTaskTitle, onInputHandleChange, activateEditMode, create
           <TitleWrapper>
             {editMode ?
               <Input autoFocus onBlur={updateTaskTitle} onChange={onInputHandleChange} value={newTitle} name='title' />
-              : <Title onDoubleClick={activateEditMode}>{title}</Title>
+              : <Title onDoubleClick={activateEditMode} onTouchEnd={activateEditMode}>{title}</Title>
             }
             {created && <Created>{created}</Created>}
           </TitleWrapper>

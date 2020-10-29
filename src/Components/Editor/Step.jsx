@@ -12,27 +12,27 @@ const InputsWrapper = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  padding: 2px;
 `;
 const CheckboxContainer = styled.div`
-  min-height: 40px;
+  height: 2rem;
 `;
 const InputContainer = styled.div`
-  min-height: 40px;
+  height: 2rem;;
   width: 100%;
   padding-left: 10px;
 `;
 const CheckBox = styled.input`
-  -ms-transform: scale(1.5); /* IE */
-  -moz-transform: scale(1.5); /* FF */
-  -webkit-transform: scale(1.5); /* Safari and Chrome */
-  -o-transform: scale(1.5); /* Opera */
-  transform: scale(1.5);
+  -ms-transform: scale(1.3); /* IE */
+  -moz-transform: scale(1.3); /* FF */
+  -webkit-transform: scale(1.3); /* Safari and Chrome */
+  -o-transform: scale(1.3); /* Opera */
+  transform: scale(1.3);
   margin: 0;
+  height: 100%;
 `;
 const Content = styled.p`
   font-size: 1.2rem;
-  line-height: 2rem;
+  height: 100%;
   margin: 0;
   padding: 0;
   text-decoration: ${props => props.isCompleted && 'line-through #0000ffa9'};
@@ -40,7 +40,7 @@ const Content = styled.p`
 const Input = styled.input`
   width: 100%;
   flex: 1;
-  line-height: 2rem;
+  height: 100%;
   padding: 0;
   font-size: 1.2rem;
   border: none;
@@ -60,7 +60,7 @@ const Step = ({ onHandleToggle, updateThisStep, onHandleChange, activateEditMode
         <InputContainer>
           {editMode ?
           <Input autoFocus onBlur={updateThisStep} onChange={onHandleChange} value={newContent} name='content' />
-          : <Content onDoubleClick={activateEditMode} isCompleted={isCompleted}>{content}</Content>
+            : <Content onDoubleClick={activateEditMode} onTouchEnd={activateEditMode} isCompleted={isCompleted}>{content}</Content>
           }
         </InputContainer>
       </InputsWrapper>

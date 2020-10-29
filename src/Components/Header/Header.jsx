@@ -13,6 +13,7 @@ const Container = styled.header`
   justify-content: ${props => props.width > 600 ? 'space-between' : 'flex-end'};
   align-items: center;
   padding: 5px 30px;
+  min-width: 320px;
 `;
 const Title = styled.h2`
   font-size: 1.8rem;
