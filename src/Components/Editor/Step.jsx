@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useWindowSize } from '../../utils/useWindowSize';
+import ButtonIcon from '../Shared/ButtonIcon';
 import Button from './../Shared/Button';
 
 const Container = styled.div`
@@ -50,6 +52,7 @@ const Input = styled.input`
 
 const Step = ({ onHandleToggle, updateThisStep, onHandleChange, activateEditMode,
   deleteThisStep, newContent, isCompleted, content, editMode }) => {
+  const width = useWindowSize()[0];
 
   return (
     <Container>
@@ -64,7 +67,9 @@ const Step = ({ onHandleToggle, updateThisStep, onHandleChange, activateEditMode
           }
         </InputContainer>
       </InputsWrapper>
-      <Button onHandleClick={deleteThisStep} name='Delete step' clear dark/>
+      {width > 780 ?
+        <Button onHandleClick={deleteThisStep} name='Delete step' clear dark />
+        : <ButtonIcon onHandleClick={deleteThisStep} className='far fa-trash-alt'/>}
     </Container>
   )
 }
