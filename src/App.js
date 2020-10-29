@@ -26,6 +26,7 @@ const App = () => {
 				<Switch>
 					<Route path="/editor/:taskId?" render={() => <EditorContainer />} />
 					<Route path="/" render={() => <MainDragDropContext />} />
+					<Route component={MainDragDropContext} />
 				</Switch>
 				{width > 480 && <Footer />}
 			</Wrapper>
