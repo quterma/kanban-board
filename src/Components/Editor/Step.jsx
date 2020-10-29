@@ -53,6 +53,7 @@ const Input = styled.input`
 const Step = ({ onHandleToggle, updateThisStep, onHandleChange, activateEditMode,
   deleteThisStep, newContent, isCompleted, content, editMode }) => {
   const width = useWindowSize()[0];
+  const onEnterDown = (e) => e.key === 'Enter' && updateThisStep();
 
   return (
     <Container>
@@ -62,7 +63,7 @@ const Step = ({ onHandleToggle, updateThisStep, onHandleChange, activateEditMode
         </CheckboxContainer>
         <InputContainer>
           {editMode ?
-          <Input autoFocus onBlur={updateThisStep} onChange={onHandleChange} value={newContent} name='content' />
+          <Input autoFocus onBlur={updateThisStep} onKeyDown={onEnterDown} onChange={onHandleChange} value={newContent} name='content' />
             : <Content onDoubleClick={activateEditMode} onTouchEnd={activateEditMode} isCompleted={isCompleted}>{content}</Content>
           }
         </InputContainer>

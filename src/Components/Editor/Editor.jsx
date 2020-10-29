@@ -35,14 +35,12 @@ const Header = styled.div`
 `;
 const TitleWrapper = styled.div`
   max-width: 50%;
-  height: 55px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 const Title = styled.h3`
   font-size: 1.3rem;
-  height: 1.5rem;
   font-weight: 700;
   padding-left: 10px;
 `;
@@ -65,7 +63,7 @@ const ButtonsWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   max-width: 40%;
-  padding: 1rem;
+  padding: 0.5rem;
 `;
 const Editarea = styled.div`
   width: 95%;
@@ -83,6 +81,7 @@ const Editarea = styled.div`
 const Editor = ({ updateTaskTitle, onInputHandleChange, activateEditMode, createNewStep, deleteThisTask, closeEditPage,
   editMode, created, newTitle, title, stepIds, taskId }) => {
   const width = useWindowSize()[0];
+  const onEnterDown = (e) => e.key === 'Enter' && updateTaskTitle();
 
   return (
     <Wrapper>
@@ -90,7 +89,7 @@ const Editor = ({ updateTaskTitle, onInputHandleChange, activateEditMode, create
         <Header>
           <TitleWrapper>
             {editMode ?
-              <Input autoFocus onBlur={updateTaskTitle} onChange={onInputHandleChange} value={newTitle} name='title' />
+              <Input autoFocus onBlur={updateTaskTitle} onKeyDown={onEnterDown} onChange={onInputHandleChange} value={newTitle} name='title' />
               : <Title onDoubleClick={activateEditMode} onTouchEnd={activateEditMode}>{title}</Title>
             }
             {created && <Created>{created}</Created>}
