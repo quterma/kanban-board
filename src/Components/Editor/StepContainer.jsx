@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useWindowSize } from '../../utils/useWindowSize';
 import { deleteStep, updateStep, selectSteps } from './../../redux/kanbanSlice';
 import Step from './Step';
 
@@ -28,6 +29,19 @@ const StepContainer = ({ stepId, taskId }) => {
   
   const deleteThisStep = () => dispatch(deleteStep({ taskId, stepId }));
 
+  const width = useWindowSize()[0];
+  const onHandleKeyDown = (e) => {
+    e.key === 'Enter' && updateContent();
+    if (e.keyCode === 27) {
+      if (step.content === '') {
+        setEditMode(false);
+        deleteThisStep();
+      } else {
+        updateContent();
+      }
+    }
+  }
+
   return (
     <Step 
       onHandleToggle={onHandleToggle}
@@ -35,10 +49,12 @@ const StepContainer = ({ stepId, taskId }) => {
       onHandleChange={onHandleChange}
       activateEditMode={activateEditMode}
       deleteThisStep={deleteThisStep}
+      onHandleKeyDown={onHandleKeyDown}
       newContent={newContent}
       isCompleted={isCompleted}
       content={content}
       editMode={editMode}
+      width={width}
     />
   )
 }

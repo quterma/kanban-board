@@ -51,12 +51,19 @@ const ColumnHeader = ({ title, thisColId }) => {
       default: return;
     }
   }
-  const onEnterDown = (e) => e.key === 'Enter' && updateColumnTitle();
+
+  const onHandleKeyDown = (e) => {
+    e.key === 'Enter' && updateColumnTitle();
+    if (e.keyCode === 27) {
+      updateColumnTitle();
+      setEditMode(false);
+    }
+  }
 
   return (
     <>
       {editMode ?
-        <Input autoFocus onBlur={updateColumnTitle} onKeyDown={onEnterDown} onChange={onHandleChange} value={newTitle} name={title}/>
+        <Input autoFocus onBlur={updateColumnTitle} onKeyDown={onHandleKeyDown} onChange={onHandleChange} value={newTitle} name={title}/>
         : <Title onDoubleClick={activateEditMode} onTouchEnd={activateEditMode}>{title}</Title>}
       {isDropdown ?
         <RelativeContainer>

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useWindowSize } from '../../utils/useWindowSize';
 import ButtonIcon from '../Shared/ButtonIcon';
 import Button from './../Shared/Button';
 
@@ -51,9 +50,7 @@ const Input = styled.input`
 `;
 
 const Step = ({ onHandleToggle, updateThisStep, onHandleChange, activateEditMode,
-  deleteThisStep, newContent, isCompleted, content, editMode }) => {
-  const width = useWindowSize()[0];
-  const onEnterDown = (e) => e.key === 'Enter' && updateThisStep();
+  deleteThisStep, newContent, isCompleted, content, editMode, width, onHandleKeyDown }) => {
 
   return (
     <Container>
@@ -63,7 +60,7 @@ const Step = ({ onHandleToggle, updateThisStep, onHandleChange, activateEditMode
         </CheckboxContainer>
         <InputContainer>
           {editMode ?
-          <Input autoFocus onBlur={updateThisStep} onKeyDown={onEnterDown} onChange={onHandleChange} value={newContent} name='content' />
+          <Input autoFocus onBlur={updateThisStep} onKeyDown={onHandleKeyDown} onChange={onHandleChange} value={newContent} name='content' />
             : <Content onDoubleClick={activateEditMode} onTouchEnd={activateEditMode} isCompleted={isCompleted}>{content}</Content>
           }
         </InputContainer>

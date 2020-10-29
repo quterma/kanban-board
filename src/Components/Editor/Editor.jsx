@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useWindowSize } from '../../utils/useWindowSize';
 import ButtonIcon from '../Shared/ButtonIcon';
 import Button from './../Shared/Button';
 import StepsInnerList from './StepsInnerList';
@@ -79,9 +78,7 @@ const Editarea = styled.div`
 `;
 
 const Editor = ({ updateTaskTitle, onInputHandleChange, activateEditMode, createNewStep, deleteThisTask, closeEditPage,
-  editMode, created, newTitle, title, stepIds, taskId }) => {
-  const width = useWindowSize()[0];
-  const onEnterDown = (e) => e.key === 'Enter' && updateTaskTitle();
+  editMode, created, newTitle, title, stepIds, taskId, onHandleKeyDown, width }) => {
 
   return (
     <Wrapper>
@@ -89,7 +86,7 @@ const Editor = ({ updateTaskTitle, onInputHandleChange, activateEditMode, create
         <Header>
           <TitleWrapper>
             {editMode ?
-              <Input autoFocus onBlur={updateTaskTitle} onKeyDown={onEnterDown} onChange={onInputHandleChange} value={newTitle} name='title' />
+              <Input autoFocus onBlur={updateTaskTitle} onKeyDown={onHandleKeyDown} onChange={onInputHandleChange} value={newTitle} name='title' />
               : <Title onDoubleClick={activateEditMode} onTouchEnd={activateEditMode}>{title}</Title>
             }
             {created && <Created>{created}</Created>}

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd'
 import { useDispatch } from 'react-redux';
-import { setTaskTitle } from './../../../redux/kanbanSlice';
+import { deleteTask, setTaskTitle } from './../../../redux/kanbanSlice';
 
 const Container = styled.div`
   background: #FFFFFF;
@@ -42,6 +42,14 @@ const Task = ({ task, index }) => {
   let history = useHistory();
   const handleDoubleClick = () => history.push(`/editor/${task.id}`);
 
+  const onHandleKeyDown = (e) => {
+    e.key === 'Enter' && updateTaskTitle();
+    if (e.keyCode === 27) {
+      setEditMode(false);
+      task.content === '' && dispatch(deleteTask(task.id));
+    }
+  }
+
   return (
     // Draggable element
     <Draggable draggableId={task.id} index={index} >
@@ -58,6 +66,7 @@ const Task = ({ task, index }) => {
             onChange={onHandleChange}
             value={newTitle}
             name={task.content}
+            onKeyDown={onHandleKeyDown}
           />
             : <Title onDoubleClick={handleDoubleClick}>{task.content}</Title>
         }

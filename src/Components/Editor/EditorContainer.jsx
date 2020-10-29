@@ -5,6 +5,7 @@ import { withRouter, useParams, useHistory } from "react-router-dom";
 import {createStep, selectTasks, setTaskTitle, deleteTask} from './../../redux/kanbanSlice'
 import { Redirect } from "react-router-dom";
 import Editor from './Editor';
+import { useWindowSize } from '../../utils/useWindowSize';
 
 // redirect HOC checks if taskId in URL exists
 const withThisTaskRedirectHOC = Component => {
@@ -52,6 +53,15 @@ const EditorContainer = () => {
     dispatch(deleteTask(taskId));
   }
 
+  const width = useWindowSize()[0];
+  const onHandleKeyDown = (e) => {
+    e.key === 'Enter' && updateTaskTitle();
+    if (e.keyCode === 27) {
+      updateTaskTitle();
+      setEditMode(false);
+    }
+  }
+
   return (
     <Editor
       updateTaskTitle={updateTaskTitle}
@@ -60,12 +70,14 @@ const EditorContainer = () => {
       createNewStep={createNewStep}
       deleteThisTask={deleteThisTask}
       closeEditPage={closeEditPage}
+      onHandleKeyDown={onHandleKeyDown}
       editMode={editMode}
       created={created}
       newTitle={newTitle}
       title={title}
       stepIds={stepIds}
       taskId={taskId}
+      width={width}
     />
   )
 }
